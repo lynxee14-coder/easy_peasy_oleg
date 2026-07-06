@@ -177,3 +177,20 @@ document.addEventListener('DOMContentLoaded', async function() {
   </script>
 </body>
 </html>
+
+  // Redirect all CTA buttons to Telegram
+  setTimeout(function() {
+    document.addEventListener('click', function(e) {
+      var target = e.target;
+      while (target && target !== document.body) {
+        if (target.tagName === 'A' || target.tagName === 'BUTTON' || target.getAttribute('role') === 'button') {
+          e.preventDefault();
+          window.location.href = 'https://t.me/m/AwidoA2nOWUy';
+          return;
+        }
+        target = target.parentElement;
+      }
+    }, true);
+  }, 100);
+  </script>
+</html>
