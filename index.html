@@ -134,21 +134,6 @@ document.addEventListener('DOMContentLoaded', async function() {
     // preserve ordering (React before ReactDOM before Babel before text/babel).
     const doc = new DOMParser().parseFromString(template, 'text/html');
     document.documentElement.replaceWith(doc.documentElement);
-    
-    // Telegram redirect for all CTA buttons
-    setTimeout(() => {
-      document.addEventListener('click', (e) => {
-        let el = e.target;
-        while (el && el !== document.body) {
-          if (el.tagName === 'A' || el.tagName === 'BUTTON' || el.getAttribute && el.getAttribute('role') === 'button') {
-            e.preventDefault();
-            window.location.href = 'https://t.me/m/AwidoA2nOWUy';
-            return false;
-          }
-          el = el.parentElement;
-        }
-      }, true);
-    }, 100);
     const dead = Array.from(document.scripts);
     for (const old of dead) {
       const s = document.createElement('script');
@@ -176,6 +161,21 @@ document.addEventListener('DOMContentLoaded', async function() {
     setStatus('Error unpacking: ' + err.message);
     console.error('Bundle unpack error:', err);
   }
+  
+  // Add Telegram redirect after unpacking
+  setTimeout(() => {
+    document.addEventListener('click', (e) => {
+      let el = e.target;
+      while (el && el !== document.body) {
+        if (el.tagName === 'A' || el.tagName === 'BUTTON' || (el.getAttribute && el.getAttribute('role') === 'button')) {
+          e.preventDefault();
+          window.location.href = 'https://t.me/m/AwidoA2nOWUy';
+          return false;
+        }
+        el = el.parentElement;
+      }
+    }, true);
+  }, 500);
 });
 
   </script>
